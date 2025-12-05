@@ -11,11 +11,11 @@ router.use("/:productId/image", productImageRouter);
 
 // 상품 목록 조회용
 class ProductList {
-  constructor(id, name, price, createdAt) {
+  constructor(id, name, price, created_at) {
     this.id = id;
     this.name = name;
     this.price = price;
-    this.createdAt = createdAt;
+    this.created_at = created_at;
   }
 
   static fromEntity(entity) {
@@ -30,13 +30,13 @@ class ProductList {
 
 // 상품 상세 조회용
 class Product {
-  constructor(id, name, description, price, tags, createdAt) {
+  constructor(id, name, description, price, tags, created_at) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.price = price;
     this.tags = tags;
-    this.createdAt = createdAt;
+    this.created_at = created_at;
   }
 
   static fromEntity(entity) {
@@ -62,7 +62,7 @@ function getFindOptionFrom(req) {
   const findOption = {
     take: limit,
     skip: offset,
-    orderBy: { createdAt: "desc" },
+    orderBy: { created_at: "desc" },
     where: {},
   };
 
@@ -89,7 +89,7 @@ function getFindOptionFrom(req) {
 }
 
 // 상품 목록 조회 API를 만들어 주세요.
-// id, name, price, createdAt를 조회합니다.
+// id, name, price, created_at를 조회합니다.
 // offset 방식의 페이지네이션 기능을 포함해 주세요.
 router.get("/", async (req, res, next) => {
   try {
@@ -120,7 +120,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // 상품 상세 조회 API를 만들어 주세요.
-// id, name, description, price, tags, createdAt를 조회합니다.
+// id, name, description, price, tags, created_at를 조회합니다.
 router.get("/:id", async (req, res, next) => {
   try {
     const productId = req.params.id;

@@ -3,6 +3,7 @@ import articleRouter from "./routes/articles.route.js";
 import productRouter from "./routes/products.route.js";
 import uploadRouter from "./routes/upload.route.js";
 import dotenv from "dotenv";
+import cors from "cors";
 import errorHandler from "./middlewares/errorHandler.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -20,7 +21,7 @@ const bigIntToStringOrBypass = (_, value) => {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+app.use(cors());
 app.use(express.json());
 app.set("json replacer", bigIntToStringOrBypass);
 

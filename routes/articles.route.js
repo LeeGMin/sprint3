@@ -3,18 +3,18 @@ import { prisma } from "../prisma/prisma.js";
 import { validateArticleInfo } from "../middlewares/validator.js";
 import { ValidationError, NotFoundError } from "../utils/CustomError.js";
 import articleCommentRouter from "./articleComment.js";
-import articleImageRouter from "./articleImage.route.js";
+import articleImageRouter from "./articleImage.js";
 const router = express.Router();
 
 router.use("/:articleId/comments", articleCommentRouter);
 router.use("/:articleId/image", articleImageRouter);
 
 class Article {
-  constructor(id, title, content, createdAt) {
+  constructor(id, title, content, created_at) {
     this.id = id;
     this.title = title;
     this.content = content;
-    this.createdAt = createdAt;
+    this.created_at = created_at;
   }
 
   static fromEntity(entity) {
@@ -28,7 +28,7 @@ class Article {
 }
 
 // 게시글 목록 조회 API를 만들어 주세요.
-// id, title, content, createdAt를 조회합니다.
+// id, title, content, created_at를 조회합니다.
 // todo: offset 방식의 페이지네이션 기능을 포함해 주세요.
 
 function getFindOptionFrom(req) {
@@ -42,7 +42,7 @@ function getFindOptionFrom(req) {
   const findOption = {
     take: limit,
     skip: offset,
-    orderBy: { createdAt: "desc" },
+    orderBy: { created_at: "desc" },
     where: {}, // where 객체 초기화
   };
 
@@ -66,7 +66,7 @@ function getFindOptionFrom(req) {
 }
 
 // 게시글 목록 조회 API를 만들어 주세요.
-// id, title, content, createdAt를 조회합니다.
+// id, title, content, created_at를 조회합니다.
 router.get("/", async (req, res, next) => {
   try {
     const findOption = getFindOptionFrom(req);
@@ -94,7 +94,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // 게시글 상세 조회 API를 만들어 주세요.
-// id, title, content, createdAt를 조회합니다.
+// id, title, content, created_at를 조회합니다.
 router.get("/:id", async (req, res, next) => {
   try {
     const articleId = req.params.id;
