@@ -3,7 +3,11 @@ import { prisma } from "../prisma/prisma.js";
 import { validateArticleInfo } from "../middlewares/validator.js";
 import { ValidationError, NotFoundError } from "../utils/CustomError.js";
 import articleCommentRouter from "./articleComment.js";
+import articleImageRouter from "./articleImage.route.js";
 const router = express.Router();
+
+router.use("/:articleId/comments", articleCommentRouter);
+router.use("/:articleId/image", articleImageRouter);
 
 class Article {
   constructor(id, title, content, createdAt) {
@@ -60,8 +64,6 @@ function getFindOptionFrom(req) {
 
   return findOption;
 }
-
-router.use("/:articleId/comments", articleCommentRouter);
 
 // 게시글 목록 조회 API를 만들어 주세요.
 // id, title, content, createdAt를 조회합니다.

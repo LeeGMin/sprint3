@@ -3,7 +3,11 @@ import { prisma } from "../prisma/prisma.js";
 import { validateProductInfo } from "../middlewares/validator.js";
 import { ValidationError, NotFoundError } from "../utils/CustomError.js";
 import productCommentRouter from "./productComment.js";
+import productImageRouter from "./productImage.js";
 const router = express.Router();
+
+router.use("/:productId/comments", productCommentRouter);
+router.use("/:productId/image", productImageRouter);
 
 // 상품 목록 조회용
 class ProductList {
@@ -83,8 +87,6 @@ function getFindOptionFrom(req) {
 
   return findOption;
 }
-
-router.use("/:productId/comments", productCommentRouter);
 
 // 상품 목록 조회 API를 만들어 주세요.
 // id, name, price, createdAt를 조회합니다.
